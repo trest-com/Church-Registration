@@ -1,2 +1,0 @@
-# Church-Registration
-Church membership
