@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gathering Ministry | Membership Registration</title>
+    <!-- Google Fonts: Montserrat (300 to 800) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e0e4ef;  /* main soft background */
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* main card container */
+        .registration-card {
+            max-width: 1000px;
+            width: 100%;
+            background: #ffffff;        /* card background white */
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        /* header with brand logo & ministry identity */
+        .brand-header {
+            background: #ffffff;
+            padding: 2rem 2rem 1.2rem;
+            text-align: center;
+            border-bottom: 4px solid #3456c2;
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 50px;               /* Sample size, adjust as needed */
+            height: 50px;     /* Background color (fallback) */
+            display: inline-flex;      /* Keeps centering properties */
+            align-items: center;       /* Vertical centering */
+            justify-content: center;   /* Horizontal centering */ 
+            margin-top: 10px;
+        }
+        .ministry-name {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #3456c2;;
+            padding: 10px;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #3456c2;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        /* membership intro panel */
+        .membership-intro {
+            background: #ededed;     /* light gray panel */
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #d4d9e6;
+        }
+
+        .membership-intro h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1f2a44;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .membership-intro h2 i {
+            color: #3456c2;
+            font-size: 1.7rem;
+        }
+
+        .membership-intro p {
+            color: #2c3a5e;
+            margin-top: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding-left: 16px;
+            background: rgba(52, 86, 194, 0.04);
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* form container */
+        .form-container {
+            padding: 2rem 2rem 2rem 2rem;
+            background: #ffffff;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.6rem 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .input-group label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1f2a44;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group label i {
+            width: 20px;
+            color: #3456c2;
+            font-size: 0.95rem;
+        }
+
+        .required-star {
+            color: #3456c2;
+            font-size: 1rem;
+            margin-left: 2px;
+        }
+
+        input, select {
+            font-family: 'Montserrat', sans-serif;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1.5px solid #e0e4ef;
+            background: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            outline: none;
+            color: #1f2a44;
+        }
+
+        input:focus, select:focus {
+            border-color: #3456c2;
+            box-shadow: 0 0 0 3px rgba(52, 86, 194, 0.15);
+            background-color: #ffffff;
+        }
+
+        input.error-border, select.error-border {
+            border-color: #e04e2e;
+            background-color: #fff8f7;
+        }
+
+        .error-message {
+            font-size: 0.7rem;
+            color: #e04e2e;
+            font-weight: 600;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* register button */
+        .register-action {
+            grid-column: span 2;
+            margin-top: 1rem;
+        }
+
+        .btn-register {
+            width: 100%;
+            background: #3456c2;
+            border: none;
+            padding: 16px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 14px rgba(52, 86, 194, 0.3);
+        }
+
+        .btn-register i {
+            font-size: 1.2rem;
+        }
+
+        .btn-register:hover {
+            background: #2a46a0;
+            transform: scale(0.98);
+            box-shadow: 0 4px 10px rgba(52, 86, 194, 0.4);
+        }
+
+        /* feedback area */
+        .form-feedback {
+            margin-top: 1.8rem;
+            padding: 1rem 1.2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            background: #ededed;
+            display: none;
+        }
+
+        .form-feedback.success {
+            background: #e2f0f7;
+            color: #1f5f6b;
+            border-left: 6px solid #3456c2;
+            display: block;
+        }
+
+        .form-feedback.error {
+            background: #ffe7e2;
+            color: #bc4e2e;
+            border-left: 6px solid #e04e2e;
+            display: block;
+        }
+
+        /* responsive */
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+            }
+            .register-action {
+                grid-column: span 1;
+            }
+            .brand-header {
+                padding: 1.5rem 1rem;
+            }
+            .ministry-name {
+                font-size: 1.8rem;
+            }
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ministry-name {
+                font-size: 1.5rem;
+                padding: 30px;
+            }
+            .logo-icon {
+                width: 15px;
+                height: 15px;
+                margin-top: 30px;
+            }
+            .membership-intro h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* custom select arrow */
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%233456c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .hint {
+            font-size: 0.7rem;
+            color: #5b6e8c;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="registration-card">
+    <!-- Header: GATHERING MINISTRY logo & branding (inspired by t-shirt image) -->
+    <div class="brand-header">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <img src="logo.jpg" alt="church-logo">
+            </div>
+            <br><br>
+            <div class="ministry-name">GATHERING MINISTRY</div>
+        </div>
+        <div class="tagline">Fountain Of Peace</div>
+    </div>
+
+    <!-- Membership required notice -->
+    <div class="membership-intro">
+        <h2><i class="fas fa-users"></i> Membership Registration</h2>
+        <p><i class="fas fa-asterisk" style="font-size: 10px;"></i> Every member should register. Fill details in every field with <strong style="color:#3456c2;">*</strong> — all fields are mandatory.</p>
+    </div>
+
+    <!-- Form area with all required fields -->
+    <div class="form-container">
+        <form id="membershipForm" novalidate action="https://sheetdb.io/api/v1/metnrfskv9853" method="post">
+            <div class="form-grid">
+                <!-- First Name * -->
+                <div class="input-group" id="group-firstname">
+                    <label><i class="fas fa-user-circle"></i> First Name <span class="required-star">*</span></label>
+                    <input type="text" id="firstname" name="data[FIRSTNAME]" placeholder="e.g., Emmanuel" autocomplete="given-name">
+                    <div class="error-msg-field" data-for="firstname"></div>
+                </div>
+
+                <!-- Surname * -->
+                <div class="input-group" id="group-surname">
+                    <label><i class="fas fa-user-tag"></i> Surname <span class="required-star">*</span></label>
+                    <input type="text" id="surname" name="data[SURNAME]"placeholder="e.g., Kamtima" autocomplete="family-name">
+                    <div class="error-msg-field" data-for="surname"></div>
+                </div>
+
+                <!-- Gender * -->
+                <div class="input-group" id="group-gender">
+                    <label><i class="fas fa-venus-mars"></i> Gender <span class="required-star">*</span></label>
+                    <select id="gender" name="data[GENDER]">
+                        <option value="" disabled selected>— Select Gender —</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-msg-field" data-for="gender"></div>
+                </div>
+
+                <!-- Age * -->
+                <div class="input-group" id="group-age">
+                    <label><i class="fas fa-calendar-alt"></i> Age <span class="required-star">*</span></label>
+                    <input type="number" id="age" name="data[AGE]" placeholder="e.g., 32" min="1" max="120" step="1">
+                    <div class="error-msg-field" data-for="age"></div>
+                </div>
+
+                <!-- Position * (role in ministry) -->
+                <div class="input-group" id="group-position">
+                    <label><i class="fas fa-chalkboard-user"></i> Position <span class="required-star">*</span></label>
+                    <input type="text" name="data[POSITION]" id="position" placeholder="e.g., Chairperson, secretary, member">
+                    <div class="error-msg-field" data-for="position"></div>
+                </div>
+
+                <!-- Village * -->
+                <div class="input-group" id="group-village">
+                    <label><i class="fas fa-tree"></i> Village <span class="required-star">*</span></label>
+                    <input type="text" name="data[VILLAGE]" id="village" placeholder="e.g., Takumana Village">
+                    <div class="error-msg-field" data-for="village"></div>
+                </div>
+
+
+                <!-- Homecell * -->
+                <div class="input-group" id="group-homecell">
+                    <label><i class="fas fa-home"></i> Homecell <span class="required-star">*</span></label>
+                    <select id="gender" name="data[HOMECELL]">
+                        <option value="" disabled selected>— Select homecell —</option>
+                        <option value="Headquarters">Headquarters</option>
+                        <option value="Mtuwangoma">Mtuwangoma</option>
+                        <option value="Umodzi (Mtiya & Chitipi)">Umodzi (Mtiya & Chitipi)</option>
+                        <option value="Msumwa">Msumwa</option>
+                    </select>
+                    <div class="error-msg-field" data-for="gender"></div>
+                </div>
+
+                <!-- Phone Number * -->
+                <div class="input-group" id="group-phone">
+                    <label><i class="fas fa-phone-alt"></i> Phone Number <span class="required-star">*</span></label>
+                    <input type="tel" id="phone" name="data[PHONE NUMBER]" placeholder="+265 999 123 456">
+                    <div class="error-msg-field" data-for="phone"></div>
+                    <small class="hint"><i class="fas fa-info-circle"></i> At least 6 characters (digits, spaces, +)</small>
+                </div>
+
+                <!-- Register Button full width -->
+                <div class="register-action">
+                    <button type="submit" class="btn-register"> REGISTER NOW <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Dynamic global feedback message -->
+        <div id="globalFeedback" class="form-feedback"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
